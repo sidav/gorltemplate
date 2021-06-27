@@ -1,4 +1,4 @@
-module anotherroguelike
+module gorltemplate
 
 go 1.16
 

@@ -2,7 +2,7 @@ package game_log
 
 import (
 	"fmt"
-	cw "anotherroguelike/console_wrapper"
+	cw "gorltemplate/console_wrapper"
 	"strings"
 )
 

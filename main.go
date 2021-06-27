@@ -1,6 +1,6 @@
 package main
 
-import "anotherroguelike/console_wrapper"
+import "gorltemplate/console_wrapper"
 
 func main() {
 	console_wrapper.Init_console()

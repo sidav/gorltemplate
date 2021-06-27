@@ -1,6 +1,6 @@
 package main
 
-import "anotherroguelike/console_wrapper"
+import "gorltemplate/console_wrapper"
 
 type playerController struct {
 	player *actor

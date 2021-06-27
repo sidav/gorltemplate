@@ -1,6 +1,6 @@
 package main
 
-import cw "anotherroguelike/console_wrapper"
+import cw "gorltemplate/console_wrapper"
 
 type renderer struct {
 	consWid, consHeight                          int
