@@ -10,7 +10,11 @@ func initLevel() {
 	}
 	for x := 0; x < len(CURRENTLEVEL.tiles); x++ {
 		for y := 0; y < len(CURRENTLEVEL.tiles[x]); y++ {
-			CURRENTLEVEL.tiles[x][y].data = tileStatics[TILE_FLOOR]
+			if seededRnd.OneChanceFrom(4) {
+				CURRENTLEVEL.tiles[x][y].data = getTileStatics("WALL")
+			} else {
+				CURRENTLEVEL.tiles[x][y].data = getTileStatics("FLOOR")
+			}
 		}
 	}
 

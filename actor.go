@@ -2,12 +2,25 @@ package main
 
 type actor struct {
 	data *actorStatic
-	x, y int
-	hp int
+
+	team int
+	ai   *actorAi
+
+	tickToAct int
+	x, y      int
+	hp        int
 }
 
-type actorStatic struct {
-	maxhp int
-	char rune
-	color int
+func (a *actor) isTimeToAct() bool {
+	return GAMETICK <= a.tickToAct
+}
+
+func (a *actor) spendTime(amount int) {
+	a.tickToAct = GAMETICK + amount
+}
+
+func (a *actor) act() {
+	if a.ai == nil {
+		return
+	}
 }

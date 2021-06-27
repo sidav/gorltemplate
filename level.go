@@ -7,7 +7,7 @@ type level struct {
 
 func (l *level) moveActorByVector(a *actor, vx, vy int) {
 	x, y := a.x, a.y
-	if l.coordsValid(x+vx, y+vy) {
+	if l.coordsValid(x+vx, y+vy) && l.tiles[x+vx][y+vy].isPassable() {
 		a.x += vx
 		a.y += vy
 	}

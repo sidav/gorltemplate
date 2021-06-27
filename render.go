@@ -33,6 +33,7 @@ func (r *renderer) renderLevel() {
 			}
 		}
 	}
+	cw.SetColor(cw.WHITE, cw.BLACK)
 }
 
 func (r *renderer) renderActors() {
@@ -41,6 +42,7 @@ func (r *renderer) renderActors() {
 		cw.SetFgColor(a.data.color)
 		cw.PutChar(a.data.char, ax, ay)
 	}
+	cw.SetColor(cw.WHITE, cw.BLACK)
 }
 
 func (r *renderer) renderUI() {
