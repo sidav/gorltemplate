@@ -7,7 +7,9 @@ type playerController struct {
 }
 
 func (pc *playerController) playerTurn() {
-	RENDERER.render(pc.player.x, pc.player.y)
+	fovMap := CURRENTLEVEL.getFovMapFrom(pc.player.x, pc.player.y, 10)
+	CURRENTLEVEL.updateWasSeenFromFovMap(fovMap)
+	RENDERER.render(pc.player.x, pc.player.y, fovMap)
 
 	key := console_wrapper.ReadKey()
 	switch key {

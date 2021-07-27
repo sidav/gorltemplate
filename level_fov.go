@@ -11,3 +11,11 @@ func (l *level) getFovMapFrom(x, y, radius int) [][]bool{
 		},
 		)
 }
+
+func (l *level) updateWasSeenFromFovMap(fovMap [][]bool) {
+	for x := range fovMap {
+		for y := range fovMap[x] {
+			l.tiles[x][y].wasSeenPreviously = l.tiles[x][y].wasSeenPreviously || fovMap[x][y]
+		}
+	}
+}

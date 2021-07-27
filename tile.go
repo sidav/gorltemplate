@@ -3,6 +3,7 @@ package main
 type tile struct {
 	data   *tileStatic
 	asDoor *tileDoor
+	wasSeenPreviously bool
 }
 
 type tileDoor struct {

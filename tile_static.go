@@ -17,10 +17,17 @@ func getTileStatics(code string) *tileStatic {
 	return ts
 }
 
+func (ts *tileStatic) getUnseenColors() (int, int) {
+	if ts.fgcolor == 0 {
+		return 0, cw.DARK_GRAY
+	}
+	return cw.DARK_GRAY, 0
+}
+
 var tileStatics = map[string] *tileStatic {
 	"FLOOR": {
 		passable: true,
-		opaque:   true,
+		opaque:   false,
 		char:     '.',
 		bgcolor:  0,
 		fgcolor:  cw.WHITE,
