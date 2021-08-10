@@ -53,16 +53,3 @@ func (r *renderer) renderActors(fovMap [][]bool) {
 	}
 	cw.SetColor(cw.WHITE, cw.BLACK)
 }
-
-func (r *renderer) renderUI() {
-	cw.SetColor(cw.BLACK, cw.GREEN)
-	cw.PutString("UI rendered", 0, r.consHeight-1)
-}
-
-func (r *renderer) globalCoordsToViewport(gx, gy int) (int, int) {
-	return gx - r.viewportCenterGlobalX + r.viewportCenterScreenX, gy - r.viewportCenterGlobalY + r.viewportCenterScreenY
-}
-
-func (r *renderer) viewportCoordsToGlobal(vx, vy int) (int, int) {
-	return vx + r.viewportCenterGlobalX - r.viewportCenterScreenX, vy + r.viewportCenterGlobalY - r.viewportCenterScreenY
-}

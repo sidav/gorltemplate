@@ -19,7 +19,7 @@ func (a *actor) spendTime(amount int) {
 	a.tickToAct = GAMETICK + amount
 }
 
-func (a *actor) act() {
+func (a *actor) decide() {
 	if a.ai == nil {
 		return
 	}

@@ -29,7 +29,7 @@ func gameLoop() {
 		}
 
 		for i := range CURRENTLEVEL.actors {
-			CURRENTLEVEL.actors[i].act()
+			CURRENTLEVEL.actors[i].decide()
 		}
 
 		GAMETICK++
