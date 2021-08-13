@@ -39,6 +39,20 @@ var tileStatics = map[string] *tileStatic {
 		bgcolor:  cw.DARK_RED,
 		fgcolor:  0,
 	},
+	"ENTRYPOINT": {
+		passable: true,
+		opaque:   false,
+		char:     '_',
+		bgcolor:  0,
+		fgcolor:  cw.WHITE,
+	},
+	"EXITPOINT": {
+		passable: true,
+		opaque:   false,
+		char:     '>',
+		bgcolor:  0,
+		fgcolor:  cw.WHITE,
+	},
 
 	// don't exlicitly use following codes
 	"_DOOR_OPENED": {

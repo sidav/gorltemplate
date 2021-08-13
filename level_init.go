@@ -22,10 +22,12 @@ func initLevel() {
 			currGeneratedTile := generatedMap[x][y]
 			switch currGeneratedTile.Code {
 			case layout_tiler.TILE_ENTRYPOINT:
-				CURRENTLEVEL.tiles[x][y].data = getTileStatics("FLOOR")
+				CURRENTLEVEL.tiles[x][y].data = getTileStatics("ENTRYPOINT")
 				entryX, entryY = x, y
 			case layout_tiler.TILE_FLOOR: CURRENTLEVEL.tiles[x][y].data = getTileStatics("FLOOR")
 			case layout_tiler.TILE_WALL: CURRENTLEVEL.tiles[x][y].data = getTileStatics("WALL")
+			case layout_tiler.TILE_EXITPOINT:
+				CURRENTLEVEL.tiles[x][y].data = getTileStatics("EXITPOINT")
 			case layout_tiler.TILE_DOOR:
 				CURRENTLEVEL.tiles[x][y].asDoor = &tileDoor{
 					isOpened:  false,
