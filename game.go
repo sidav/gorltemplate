@@ -25,7 +25,9 @@ func gameLoop() {
 
 	for GAMEISRUNNING {
 		if GAMETICK%TicksInTurn == 0 {
-			PLAYERCONTROLLER.playerTurn()
+			for GAMEISRUNNING && !CURRENTLEVEL.tryExecuteActorsIntent(PLAYERCONTROLLER.player) {
+				PLAYERCONTROLLER.playerTurn()
+			}
 		}
 
 		for i := range CURRENTLEVEL.actors {
@@ -33,7 +35,7 @@ func gameLoop() {
 		}
 
 		for i := range CURRENTLEVEL.actors {
-			CURRENTLEVEL.executeActorsIntent(CURRENTLEVEL.actors[i])
+			CURRENTLEVEL.tryExecuteActorsIntent(CURRENTLEVEL.actors[i])
 		}
 
 		GAMETICK++
