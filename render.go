@@ -28,14 +28,15 @@ func (r *renderer) renderLevel(fovMap [][]bool) {
 		for sy := 0; sy < r.consHeight; sy++ {
 			gx, gy := r.viewportCoordsToGlobal(sx, sy)
 			if CURRENTLEVEL.coordsValid(gx, gy) {
+				staticData := CURRENTLEVEL.tiles[gx][gy].getStaticData()
 				if fovMap[gx][gy] {
-					cw.SetColor(CURRENTLEVEL.tiles[gx][gy].data.fgcolor, CURRENTLEVEL.tiles[gx][gy].data.bgcolor)
-					cw.PutChar(CURRENTLEVEL.tiles[gx][gy].data.char, sx, sy)
+					cw.SetColor(staticData.fgcolor, staticData.bgcolor)
+					cw.PutChar(staticData.char, sx, sy)
 
 				} else if CURRENTLEVEL.tiles[gx][gy].wasSeenPreviously {
-					fg, bg := CURRENTLEVEL.tiles[gx][gy].data.getUnseenColors()
+					fg, bg := staticData.getUnseenColors()
 					cw.SetColor(fg, bg)
-					cw.PutChar(CURRENTLEVEL.tiles[gx][gy].data.char, sx, sy)
+					cw.PutChar(staticData.char, sx, sy)
 				}
 			}
 		}

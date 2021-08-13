@@ -36,10 +36,25 @@ var tileStatics = map[string] *tileStatic {
 		passable: false,
 		opaque:   true,
 		char:     ' ',
-		bgcolor:  cw.RED,
+		bgcolor:  cw.DARK_RED,
 		fgcolor:  0,
 	},
 
+	// don't exlicitly use following codes
+	"_DOOR_OPENED": {
+		passable: true,
+		opaque:   false,
+		char:     '\'',
+		bgcolor:  0,
+		fgcolor:  cw.RED,
+	},
+	"_DOOR_CLOSED": {
+		passable: false,
+		opaque:   true,
+		char:     '+',
+		bgcolor:  0,
+		fgcolor:  cw.RED,
+	},
 	"DEFAULT_VALUE": {
 		passable: false,
 		opaque:   false,
