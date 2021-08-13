@@ -14,9 +14,9 @@ func (pc *playerController) playerTurn() {
 	key := console_wrapper.ReadKey()
 	switch key {
 	case "ESCAPE": GAMEISRUNNING = false
-	case "UP": CURRENTLEVEL.moveActorByVector(pc.player, 0, -1)
-	case "DOWN": CURRENTLEVEL.moveActorByVector(pc.player, 0, 1)
-	case "LEFT": CURRENTLEVEL.moveActorByVector(pc.player, -1,0)
-	case "RIGHT": CURRENTLEVEL.moveActorByVector(pc.player, 1, 0)
+	case "UP": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, 0, -1, 10)
+	case "DOWN": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, 0, 1, 10)
+	case "LEFT": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, -1,0, 10)
+	case "RIGHT": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, 1, 0, 10)
 	}
 }

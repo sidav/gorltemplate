@@ -31,8 +31,5 @@ func (t *tile) getStaticData() *tileStatic {
 //}
 
 func (t *tile) isPassable() bool {
-	if t.asDoor != nil {
-		return t.asDoor.isOpened
-	}
-	return t.data.passable
+	return t.getStaticData().passable
 }

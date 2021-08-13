@@ -9,7 +9,7 @@ type intentTypeCode uint8
 const (
 	INTENT_NOTHING intentTypeCode = iota
 	INTENT_WAIT
-	INTENT_MOVE
+	INTENT_MOVE_OR_OPEN_DOOR
 	INTENT_ATTACK
 )
 

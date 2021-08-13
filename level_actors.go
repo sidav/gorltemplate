@@ -1,0 +1,51 @@
+package main
+
+func (l *level) isAnyActorPresentAt(x, y int) bool {
+	for i := range l.actors {
+		if l.actors[i].x == x && l.actors[i].y == y {
+			return true
+		}
+	}
+	return false
+}
+
+func (l *level) getFirstActorAtCoords(x, y int) *actor {
+	for i := range l.actors {
+		if l.actors[i].x == x && l.actors[i].y == y {
+			return l.actors[i]
+		}
+	}
+	return nil
+}
+
+func (l *level) getAllActorsAtCoords(x, y int) []*actor {
+	var actors []*actor
+	for i := range l.actors {
+		if l.actors[i].x == x && l.actors[i].y == y {
+			actors = append(actors, l.actors[i])
+		}
+	}
+	return actors
+}
+
+// true if door was opened
+func (l *level) tryOpenDoorForActor(a *actor, vx, vy int) bool {
+	doorX, doorY := a.x + vx, a.y + vy
+	if l.coordsValid(doorX, doorY) {
+		if l.tiles[doorX][doorY].asDoor != nil && !l.tiles[doorX][doorY].asDoor.isOpened {
+			l.tiles[doorX][doorY].asDoor.isOpened = true
+			return true
+		}
+	}
+	return false
+}
+
+func (l *level) tryMoveActorByVector(a *actor, vx, vy int) bool {
+	x, y := a.x, a.y
+	if l.coordsValid(x+vx, y+vy) && l.tiles[x+vx][y+vy].isPassable() {
+		a.x += vx
+		a.y += vy
+		return true
+	}
+	return false
+}
