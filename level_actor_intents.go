@@ -9,6 +9,10 @@ func (l *level) executeActorsIntent(a *actor) {
 	}
 	switch a.intent.intentType {
 	case INTENT_MOVE_OR_OPEN_DOOR:
+		if l.tryActivateSwitchAsActor(a, a.intent.vx, a.intent.vy) {
+			a.intent.intentType = INTENT_WAIT
+			return
+		}
 		if l.tryOpenDoorForActor(a, a.intent.vx, a.intent.vy) {
 			a.intent.intentType = INTENT_WAIT
 			return

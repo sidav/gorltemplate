@@ -32,12 +32,17 @@ func (l *level) getAllActorsAtCoords(x, y int) []*actor {
 func (l *level) tryOpenDoorForActor(a *actor, vx, vy int) bool {
 	doorX, doorY := a.x + vx, a.y + vy
 	if l.coordsValid(doorX, doorY) {
-		if l.tiles[doorX][doorY].asDoor != nil && !l.tiles[doorX][doorY].asDoor.isOpened {
+		if l.tiles[doorX][doorY].asDoor != nil && l.tiles[doorX][doorY].asDoor.lockLevel == 0 && !l.tiles[doorX][doorY].asDoor.isOpened {
 			l.tiles[doorX][doorY].asDoor.isOpened = true
 			return true
 		}
 	}
 	return false
+}
+
+func (l *level) tryActivateSwitchAsActor(a *actor, vx, vy int) bool {
+	switchX, switchY := a.x + vx, a.y + vy
+	return l.activateSwitchAt(switchX, switchY)
 }
 
 func (l *level) tryMoveActorByVector(a *actor, vx, vy int) bool {

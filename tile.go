@@ -3,6 +3,7 @@ package main
 type tile struct {
 	data   *tileStatic
 	asDoor *tileDoor
+	asSwitch *tileSwitch
 	wasSeenPreviously bool
 }
 
@@ -11,10 +12,24 @@ type tileDoor struct {
 	lockLevel int
 }
 
+type tileSwitch struct {
+	isActivated bool
+	lockLevel int
+}
+
 func (t *tile) getStaticData() *tileStatic {
+	if t.asSwitch != nil {
+		if t.asSwitch.isActivated {
+			return getTileStatics("_SWITCH_ON")
+		}
+		return getTileStatics("_SWITCH_OFF")
+	}
 	if t.asDoor != nil {
 		if t.asDoor.isOpened {
 			return getTileStatics("_DOOR_OPENED")
+		}
+		if t.asDoor.lockLevel > 0 {
+			return getTileStatics("_DOOR_LOCKED")
 		}
 		return getTileStatics("_DOOR_CLOSED")
 	}
