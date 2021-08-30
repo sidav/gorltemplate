@@ -15,6 +15,10 @@ func (a *actor) isTimeToAct() bool {
 	return a.intent == nil || a.intent.turnToComplete <= GAMETICK
 }
 
+func (a *actor) getCoords() (int, int) {
+	return a.x, a.y
+}
+
 func (a *actor) setIntent(intType intentTypeCode, vx, vy, duration int) {
 	if a.intent == nil {
 		a.intent = &actorIntent{}

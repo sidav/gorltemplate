@@ -9,6 +9,10 @@ func (l *level) coordsValid(x, y int) bool {
 	return x >= 0 && y >= 0 && x < len(l.tiles) && y < len(l.tiles[0])
 }
 
+func (l *level) countTilesAround(x, y int, includeCenter, reverseCount bool) int {
+	return 0 // TODO
+}
+
 func (l *level) activateSwitchAt(sx, sy int) bool {
 	if l.coordsValid(sx, sy) {
 		if l.tiles[sx][sy].asSwitch != nil {

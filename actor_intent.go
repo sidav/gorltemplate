@@ -10,6 +10,7 @@ const (
 	INTENT_NOTHING intentTypeCode = iota
 	INTENT_WAIT
 	INTENT_MOVE_OR_OPEN_DOOR
+	INTENT_MOVE_ONLY
 	INTENT_ATTACK
 )
 
@@ -17,4 +18,8 @@ type actorIntent struct {
 	intentType intentTypeCode
 	vx, vy int
 	turnToComplete int
+}
+
+func (aInt *actorIntent) isInstant() bool {
+	return aInt.intentType == INTENT_MOVE_ONLY || aInt.intentType == INTENT_MOVE_OR_OPEN_DOOR
 }
