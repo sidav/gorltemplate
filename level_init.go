@@ -50,11 +50,13 @@ func initLevel() {
 		y:  entryY,
 		hp: 5,
 		data: &actorStatic{
+			name: "Player",
 			maxhp: 5,
 			char:  '@',
 			color: cw.WHITE,
 		},
 	}
 	CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, plr)
+
 	PLAYERCONTROLLER.player = plr
 }
