@@ -47,7 +47,7 @@ func (l *level) tryActivateSwitchAsActor(a *actor, vx, vy int) bool {
 
 func (l *level) tryMoveActorByVector(a *actor, vx, vy int) bool {
 	x, y := a.x, a.y
-	if l.coordsValid(x+vx, y+vy) && l.tiles[x+vx][y+vy].isPassable() {
+	if l.isTilePassable(x+vx, y+vy) {
 		a.x += vx
 		a.y += vy
 		return true

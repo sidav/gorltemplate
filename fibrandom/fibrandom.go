@@ -126,7 +126,7 @@ func (rnd *FibRandom) RandomPercent() int {
 	return rnd.Rand(100)
 }
 
-func (rnd *FibRandom) NRandomNumbersInRange(count, from, to int, uniqueOnly bool) []int {
+func (rnd *FibRandom) ArrayOfRandomsInRange(count, from, to int, uniqueOnly bool) []int {
 	if uniqueOnly && to-from+1 < count {
 		panic(fmt.Sprintf("FibRandom: can't generate %d unique values in [%d-%d] range", count, from, to))
 	}

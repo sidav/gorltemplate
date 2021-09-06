@@ -58,5 +58,31 @@ func initLevel() {
 	}
 	CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, plr)
 
+
+
+	emptyCoords := make([][]int, 0)
+	for x := 0; x < len(CURRENTLEVEL.tiles); x++ {
+		for y := 0; y < len(CURRENTLEVEL.tiles[x]); y++ {
+			if CURRENTLEVEL.isTilePassable(x, y) {
+				emptyCoords = append(emptyCoords, []int{x, y})
+			}
+		}
+	}
+	if len(emptyCoords) >= 10 {
+		indicesToSelect := rnd.ArrayOfRandomsInRange(10, 0, len(emptyCoords)-1, true)
+		for _, index := range indicesToSelect {
+			newEnemy := &actor{
+				data:   allActorStatics["TESTENEMY"],
+				intent: nil,
+				team:   1,
+				ai:     &actorAi{},
+				x:      emptyCoords[index][0],
+				y:      emptyCoords[index][1],
+				hp:     5,
+			}
+			CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, newEnemy)
+		}
+	}
+
 	PLAYERCONTROLLER.player = plr
 }

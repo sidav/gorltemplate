@@ -13,6 +13,10 @@ func (l *level) countTilesAround(x, y int, includeCenter, reverseCount bool) int
 	return 0 // TODO
 }
 
+func (l *level) isTilePassable(x, y int) bool {
+	return l.coordsValid(x, y) && l.tiles[x][y].isPassable() && !l.isAnyActorPresentAt(x, y)
+}
+
 func (l *level) activateSwitchAt(sx, sy int) bool {
 	if l.coordsValid(sx, sy) {
 		if l.tiles[sx][sy].asSwitch != nil {
