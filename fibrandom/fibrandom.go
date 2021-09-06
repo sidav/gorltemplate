@@ -1,6 +1,7 @@
 package fibrandom
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -123,6 +124,33 @@ func (rnd *FibRandom) RandInRange(from, to int) int { //should be inclusive
 
 func (rnd *FibRandom) RandomPercent() int {
 	return rnd.Rand(100)
+}
+
+func (rnd *FibRandom) NRandomNumbersInRange(count, from, to int, uniqueOnly bool) []int {
+	if uniqueOnly && to-from+1 < count {
+		panic(fmt.Sprintf("FibRandom: can't generate %d unique values in [%d-%d] range", count, from, to))
+	}
+	randoms := make([]int, count)
+	for i := range randoms {
+		currRand := rnd.RandInRange(from, to)
+		if i > 0 && uniqueOnly {
+			generateAgain := true
+			for generateAgain {
+				generateAgain = false
+				for j := 0; j < i; j++ {
+					if currRand == randoms[j] {
+						generateAgain = true
+						break
+					}
+				}
+				if generateAgain {
+					currRand = rnd.RandInRange(from, to)
+				}
+			}
+		}
+		randoms[i] = currRand
+	}
+	return randoms
 }
 
 func (rnd *FibRandom) SelectRandomIndexFromWeighted(totalIndices int, getWeight func(int) int) int {
