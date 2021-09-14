@@ -32,9 +32,3 @@ func (a *actor) setIntent(intType intentTypeCode, vx, vy, duration int) {
 //func (a *actor) spendTime(amount int) {
 //	a.tickToAct = GAMETICK + amount
 //}
-
-func (a *actor) decide() {
-	if a.ai == nil {
-		return
-	}
-}

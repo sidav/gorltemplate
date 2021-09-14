@@ -31,7 +31,7 @@ func gameLoop() {
 		}
 
 		for i := range CURRENTLEVEL.actors {
-			CURRENTLEVEL.actors[i].decide()
+			CURRENTLEVEL.actors[i].aiAct()
 		}
 
 		for i := range CURRENTLEVEL.actors {
