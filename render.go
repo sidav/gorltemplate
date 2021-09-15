@@ -3,6 +3,7 @@ package main
 import cw "gorltemplate/console_wrapper"
 
 type renderer struct {
+	ignoreFOV bool
 	consWid, consHeight                          int
 	viewportCenterScreenX, viewportCenterScreenY int
 	viewportCenterGlobalX, viewportCenterGlobalY int
@@ -29,7 +30,7 @@ func (r *renderer) renderLevel(fovMap [][]bool) {
 			gx, gy := r.viewportCoordsToGlobal(sx, sy)
 			if CURRENTLEVEL.coordsValid(gx, gy) {
 				staticData := CURRENTLEVEL.tiles[gx][gy].getStaticData()
-				if fovMap[gx][gy] {
+				if fovMap[gx][gy] || r.ignoreFOV {
 					cw.SetColor(staticData.fgcolor, staticData.bgcolor)
 					cw.PutChar(staticData.char, sx, sy)
 
@@ -46,7 +47,7 @@ func (r *renderer) renderLevel(fovMap [][]bool) {
 
 func (r *renderer) renderActors(fovMap [][]bool) {
 	for _, a := range CURRENTLEVEL.actors {
-		if fovMap[a.x][a.y] {
+		if fovMap[a.x][a.y] || r.ignoreFOV {
 			ax, ay := r.globalCoordsToViewport(a.x, a.y)
 			cw.SetFgColor(a.data.color)
 			cw.PutChar(a.data.char, ax, ay)

@@ -25,8 +25,10 @@ func (pc *playerController) playerTurn() {
 
 	key = console_wrapper.ReadKey()
 	switch key {
+	case "INSERT": RENDERER.ignoreFOV = !RENDERER.ignoreFOV
 	case "ESCAPE": GAMEISRUNNING = false
 	// simple movement/action
+	case " ", "SPACE", "5": pc.player.setIntent(INTENT_WAIT, 0, 0, 10)
 	case "UP", "k": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, 0, -1, 10)
 	case "y": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, -1, -1, 10)
 	case "DOWN", "j": pc.player.setIntent(INTENT_MOVE_OR_OPEN_DOOR, 0, 1, 10)
