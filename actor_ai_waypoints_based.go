@@ -28,6 +28,9 @@ func (ai *actorAi) setNextWaypoint() {
 
 func (a *actor) navigateThroughWaypoints() {
 	ai := a.ai
+	if len(ai.waypoints) <= 1 {
+		return
+	}
 	nextx, nexty := ai.waypoints[ai.currentWaypointIndex][0], ai.waypoints[ai.currentWaypointIndex][1]
 	if a.x == nextx && a.y == nexty {
 		ai.setNextWaypoint()
