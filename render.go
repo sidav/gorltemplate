@@ -1,6 +1,9 @@
 package main
 
-import cw "gorltemplate/console_wrapper"
+import (
+	cw "gorltemplate/console_wrapper"
+	"strconv"
+)
 
 type renderer struct {
 	ignoreFOV bool
@@ -47,6 +50,13 @@ func (r *renderer) renderLevel(fovMap [][]bool) {
 
 func (r *renderer) renderActors(fovMap [][]bool) {
 	for _, a := range CURRENTLEVEL.actors {
+		if a.ai != nil && r.ignoreFOV {
+			for i := 0; i < len(a.ai.waypoints); i++ {
+				aix, aiy := r.globalCoordsToViewport(a.ai.waypoints[i][0], a.ai.waypoints[i][1])
+				cw.SetColor(cw.MAGENTA, cw.BLACK)
+				cw.PutString(strconv.Itoa(i), aix, aiy)
+			}
+		}
 		if fovMap[a.x][a.y] || r.ignoreFOV {
 			ax, ay := r.globalCoordsToViewport(a.x, a.y)
 			cw.SetFgColor(a.data.color)

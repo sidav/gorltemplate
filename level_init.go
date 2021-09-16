@@ -69,17 +69,17 @@ func initLevel() {
 		}
 	}
 	if len(emptyCoords) >= 10 {
-		indicesToSelect := rnd.ArrayOfRandomsInRange(10, 0, len(emptyCoords)-1, true)
+		indicesToSelect := rnd.ArrayOfRandomsInRange(1, 0, len(emptyCoords)-1, true)
 		for _, index := range indicesToSelect {
 			newEnemy := &actor{
 				data:   allActorStatics["TESTENEMY"],
 				intent: nil,
 				team:   1,
-				ai:     &actorAi{},
 				x:      emptyCoords[index][0],
 				y:      emptyCoords[index][1],
 				hp:     5,
 			}
+			newEnemy.initializeAI(AI_TYPE_WAYPOINT_BASED)
 			CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, newEnemy)
 		}
 	}

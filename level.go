@@ -17,6 +17,10 @@ func (l *level) isTilePassable(x, y int) bool {
 	return l.coordsValid(x, y) && l.tiles[x][y].isPassable() && !l.isAnyActorPresentAt(x, y)
 }
 
+func (l *level) isTilePotentiallyPassable(x, y int) bool {
+	return l.coordsValid(x, y) && (l.tiles[x][y].isPassable() || l.tiles[x][y].asDoor != nil)
+}
+
 func (l *level) activateSwitchAt(sx, sy int) bool {
 	if l.coordsValid(sx, sy) {
 		if l.tiles[sx][sy].asSwitch != nil {
