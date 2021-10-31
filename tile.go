@@ -45,6 +45,10 @@ func (t *tile) getStaticData() *tileStatic {
 //	}
 //}
 
-func (t *tile) isPassable() bool {
-	return t.getStaticData().passable
+func (t *tile) isPassableForMovementType(movementType byte) bool {
+	return t.getStaticData().passabilityForMovementType[movementType]
+}
+
+func (t *tile) isPassableForAnything() bool {
+	return t.getStaticData().passabilityForMovementType[MOVEMENT_WALK]
 }

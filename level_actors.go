@@ -47,7 +47,7 @@ func (l *level) tryActivateSwitchAsActor(a *actor, vx, vy int) bool {
 
 func (l *level) tryMoveActorByVector(a *actor, vx, vy int) bool {
 	x, y := a.x, a.y
-	if l.isTilePassable(x+vx, y+vy) {
+	if l.isTilePassableFor(x+vx, y+vy, a) {
 		a.x += vx
 		a.y += vy
 		return true

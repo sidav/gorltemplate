@@ -46,7 +46,7 @@ func (a *actor) aiBehave() {
 	if ai.aiType == AI_TYPE_WAYPOINT_BASED {
 		a.navigateThroughWaypoints()
 	} else {
-		if !CURRENTLEVEL.isTilePassable(a.x+ai.vectorX, a.y+ai.vectorY) {
+		if !CURRENTLEVEL.isTilePassableFor(a.x+ai.vectorX, a.y+ai.vectorY, a) {
 			ai.vectorX, ai.vectorY = rnd.RandInRange(-1, 1), rnd.RandInRange(-1, 1)
 		}
 		a.setIntent(INTENT_MOVE_OR_OPEN_DOOR, ai.vectorX, ai.vectorY, 10)

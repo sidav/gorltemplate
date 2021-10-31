@@ -3,7 +3,8 @@ package main
 import cw "gorltemplate/console_wrapper"
 
 type tileStatic struct {
-	passable         bool
+	passabilityForMovementType map[byte]bool
+
 	opaque           bool
 	char             rune
 	bgcolor, fgcolor int
@@ -24,77 +25,84 @@ func (ts *tileStatic) getUnseenColors() (int, int) {
 	return cw.DARK_GRAY, 0
 }
 
-var tileStatics = map[string] *tileStatic {
+var tileStatics = map[string]*tileStatic{
 	"FLOOR": {
-		passable: true,
-		opaque:   false,
-		char:     '.',
-		bgcolor:  0,
-		fgcolor:  cw.WHITE,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: true, MOVEMENT_AMPHIBIOUS: true},
+		opaque:          false,
+		char:            '.',
+		bgcolor:         0,
+		fgcolor:         cw.WHITE,
 	},
 	"WALL": {
-		passable: false,
-		opaque:   true,
-		char:     ' ',
-		bgcolor:  cw.DARK_RED,
-		fgcolor:  0,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          true,
+		char:            ' ',
+		bgcolor:         cw.DARK_RED,
+		fgcolor:         0,
 	},
 	"ENTRYPOINT": {
-		passable: true,
-		opaque:   false,
-		char:     '_',
-		bgcolor:  0,
-		fgcolor:  cw.WHITE,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: true, MOVEMENT_AMPHIBIOUS: true},
+		opaque:          false,
+		char:            '_',
+		bgcolor:         0,
+		fgcolor:         cw.WHITE,
 	},
 	"EXITPOINT": {
-		passable: true,
-		opaque:   false,
-		char:     '>',
-		bgcolor:  0,
-		fgcolor:  cw.WHITE,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: true, MOVEMENT_AMPHIBIOUS: true},
+		opaque:          false,
+		char:            '>',
+		bgcolor:         0,
+		fgcolor:         cw.WHITE,
+	},
+	"WATER": {
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: true},
+		opaque:          false,
+		char:            '~',
+		bgcolor:         0,
+		fgcolor:         cw.BLUE,
 	},
 
 	// don't exlicitly use following codes
 	"_DOOR_OPENED": {
-		passable: true,
-		opaque:   false,
-		char:     '\'',
-		bgcolor:  0,
-		fgcolor:  cw.RED,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: true, MOVEMENT_AMPHIBIOUS: true},
+		opaque:          false,
+		char:            '\'',
+		bgcolor:         0,
+		fgcolor:         cw.RED,
 	},
 	"_DOOR_CLOSED": {
-		passable: false,
-		opaque:   true,
-		char:     '+',
-		bgcolor:  0,
-		fgcolor:  cw.RED,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          true,
+		char:            '+',
+		bgcolor:         0,
+		fgcolor:         cw.RED,
 	},
 	"_DOOR_LOCKED": {
-		passable: false,
-		opaque:   true,
-		char:     '#',
-		bgcolor:  0,
-		fgcolor:  cw.DARK_BLUE,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          true,
+		char:            '#',
+		bgcolor:         0,
+		fgcolor:         cw.DARK_BLUE,
 	},
 	"_SWITCH_OFF": {
-		passable: false,
-		opaque:   false,
-		char:     '*',
-		bgcolor:  0,
-		fgcolor:  cw.RED,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          false,
+		char:            '*',
+		bgcolor:         0,
+		fgcolor:         cw.RED,
 	},
 	"_SWITCH_ON": {
-		passable: false,
-		opaque:   false,
-		char:     '*',
-		bgcolor:  0,
-		fgcolor:  cw.BLUE,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          false,
+		char:            '*',
+		bgcolor:         0,
+		fgcolor:         cw.BLUE,
 	},
 	"DEFAULT_VALUE": {
-		passable: false,
-		opaque:   false,
-		char: '?',
-		bgcolor:  cw.DARK_MAGENTA,
-		fgcolor:  cw.CYAN,
+		passabilityForMovementType: map[byte]bool{MOVEMENT_WALK: false, MOVEMENT_AMPHIBIOUS: false},
+		opaque:          false,
+		char:            '?',
+		bgcolor:         cw.DARK_MAGENTA,
+		fgcolor:         cw.CYAN,
 	},
 }

@@ -13,16 +13,20 @@ func (l *level) countTilesAround(x, y int, includeCenter, reverseCount bool) int
 	return 0 // TODO
 }
 
-func (l *level) isTilePassable(x, y int) bool {
-	return l.coordsValid(x, y) && l.tiles[x][y].isPassable() && !l.isAnyActorPresentAt(x, y)
+func (l *level) isTilePassableFor(x, y int, a *actor) bool {
+	movementType := MOVEMENT_WALK
+	if a != nil {
+		movementType = a.data.movementType
+	}
+	return l.coordsValid(x, y) && l.tiles[x][y].isPassableForMovementType(movementType) && !l.isAnyActorPresentAt(x, y)
 }
 
 func (l *level) isTilePotentiallyPassable(x, y int, considerLockedDoorsAsPassable bool) bool {
 	if considerLockedDoorsAsPassable {
-		return l.coordsValid(x, y) && (l.tiles[x][y].isPassable() || l.tiles[x][y].asDoor != nil)
+		return l.coordsValid(x, y) && (l.tiles[x][y].isPassableForAnything() || l.tiles[x][y].asDoor != nil)
 	} else {
 		return l.coordsValid(x, y) &&
-			(l.tiles[x][y].isPassable() || l.tiles[x][y].asDoor != nil && l.tiles[x][y].asDoor.lockLevel == 0)
+			(l.tiles[x][y].isPassableForAnything() || l.tiles[x][y].asDoor != nil && l.tiles[x][y].asDoor.lockLevel == 0)
 	}
 }
 
