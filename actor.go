@@ -1,14 +1,23 @@
 package main
 
 type actor struct {
-	data *actorStatic
+	data   *actorStatic
 	intent *actorIntent
 
-	team int
+	team int // -1 means neutral, 0 means enemy to everyone
 	ai   *actorAi
 
-	x, y      int
-	hp        int
+	x, y int
+	hp   int
+
+	inv *inventory
+}
+
+func (a *actor) init() {
+	a.hp = a.data.maxhp
+	if a.inv == nil {
+		a.inv = &inventory{}
+	}
 }
 
 func (a *actor) isTimeToAct() bool {

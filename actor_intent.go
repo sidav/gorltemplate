@@ -10,6 +10,7 @@ const (
 	INTENT_NOTHING intentTypeCode = iota
 	INTENT_WAIT
 	INTENT_MOVE_OR_OPEN_DOOR
+	INTENT_MELEE_ATTACK
 	INTENT_MOVE_ONLY
 	INTENT_ATTACK
 )
@@ -21,5 +22,7 @@ type actorIntent struct {
 }
 
 func (aInt *actorIntent) isInstant() bool {
-	return aInt.intentType == INTENT_MOVE_ONLY || aInt.intentType == INTENT_MOVE_OR_OPEN_DOOR
+	return aInt.intentType == INTENT_MOVE_ONLY ||
+		aInt.intentType == INTENT_MOVE_OR_OPEN_DOOR ||
+		aInt.intentType == INTENT_MELEE_ATTACK
 }

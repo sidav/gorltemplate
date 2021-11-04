@@ -1,5 +1,15 @@
 package main
 
+func (l *level) cleanDeadActors() {
+	for i := len(l.actors)-1; i >= 0; i-- {
+		if l.actors[i].hp <= 0 {
+			// switch i-th and last element from slice, remove last element from slice
+			l.actors[i] = l.actors[len(l.actors)-1]
+			l.actors = l.actors[:len(l.actors)-1]
+		}
+	}
+}
+
 func (l *level) isAnyActorPresentAt(x, y int) bool {
 	for i := range l.actors {
 		if l.actors[i].x == x && l.actors[i].y == y {

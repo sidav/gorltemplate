@@ -36,8 +36,16 @@ func gameLoop() {
 			}
 		}
 
+		cleanupNeeded := false
 		for i := range CURRENTLEVEL.actors {
-			CURRENTLEVEL.actors[i].aiAct()
+			if CURRENTLEVEL.actors[i].hp <= 0 {
+				cleanupNeeded = true
+			} else {
+				CURRENTLEVEL.actors[i].aiAct()
+			}
+		}
+		if cleanupNeeded {
+			CURRENTLEVEL.cleanDeadActors()
 		}
 
 		for i := range CURRENTLEVEL.actors {

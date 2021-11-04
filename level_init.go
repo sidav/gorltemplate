@@ -59,6 +59,7 @@ func initLevel() {
 			movementType: MOVEMENT_AMPHIBIOUS,
 		},
 	}
+	plr.init()
 	CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, plr)
 
 
@@ -85,6 +86,7 @@ func initLevel() {
 				y:      emptyCoords[index][1],
 				hp:     5,
 			}
+			newEnemy.init()
 			newEnemy.initializeAI(ai_types[ai_ind])
 			CURRENTLEVEL.actors = append(CURRENTLEVEL.actors, newEnemy)
 		}

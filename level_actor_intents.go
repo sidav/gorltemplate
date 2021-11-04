@@ -26,6 +26,15 @@ func (l *level) tryExecuteActorsIntent(a *actor) bool {
 			a.intent.intentType = INTENT_WAIT
 			return true
 		}
+		if l.tryPerformMeleeAttack(a, a.intent.vx, a.intent.vy) {
+			a.intent.intentType = INTENT_WAIT
+			return true
+		}
+	case INTENT_MELEE_ATTACK:
+		if l.tryPerformMeleeAttack(a, a.intent.vx, a.intent.vy) {
+			a.intent.intentType = INTENT_WAIT
+			return true
+		}
 	}
 	return false
 }

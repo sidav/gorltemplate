@@ -26,7 +26,7 @@ func getActorStaticByCode(code string) *actorStatic {
 var allActorStatics = map[string]*actorStatic {
 	"TESTENEMY1": {
 		maxhp: 10,
-		name: "Test enemy",
+		name: "Test enemy nonwaypoint",
 		char: 'e',
 		color: cw.RED,
 		movementType: MOVEMENT_WALK,
@@ -35,13 +35,6 @@ var allActorStatics = map[string]*actorStatic {
 		maxhp: 10,
 		name: "Test enemy",
 		char: 'w',
-		color: cw.RED,
-		movementType: MOVEMENT_WALK,
-	},
-	"TESTENEMY3": {
-		maxhp: 10,
-		name: "Test enemy",
-		char: 'k',
 		color: cw.RED,
 		movementType: MOVEMENT_WALK,
 	},
