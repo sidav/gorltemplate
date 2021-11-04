@@ -1,6 +1,9 @@
 package main
 
-import "gorltemplate/fibrandom"
+import (
+	"gorltemplate/fibrandom"
+	"gorltemplate/game_log"
+)
 
 const (
 	TicksInTurn = 10
@@ -13,11 +16,14 @@ var (
 	PLAYERCONTROLLER playerController
 	GAMETICK         int
 
+	log game_log.GameLog
+
 	seededRnd fibrandom.FibRandom // for seed-based recreation
 	rnd       fibrandom.FibRandom // for everything else
 )
 
 func gameLoop() {
+	log.Init(2)
 	rnd.InitDefault()
 	seededRnd.InitDefault()
 
