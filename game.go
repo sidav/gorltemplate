@@ -18,8 +18,9 @@ var (
 
 	log game_log.GameLog
 
-	seededRnd fibrandom.FibRandom // for seed-based recreation
-	rnd       fibrandom.FibRandom // for everything else
+	seededRnd    fibrandom.FibRandom // for seed-based recreation
+	rnd          fibrandom.FibRandom // for everything else
+	playerFovMap [][]bool
 )
 
 func gameLoop() {
@@ -32,6 +33,8 @@ func gameLoop() {
 	for GAMEISRUNNING {
 		if GAMETICK%TicksInTurn == 0 {
 			for GAMEISRUNNING && !CURRENTLEVEL.tryExecuteActorsIntent(PLAYERCONTROLLER.player) {
+				playerFovMap = CURRENTLEVEL.getFovMapFrom(PLAYERCONTROLLER.player.x, PLAYERCONTROLLER.player.y, 10)
+				CURRENTLEVEL.updateWasSeenFromFovMap(playerFovMap)
 				PLAYERCONTROLLER.playerTurn()
 			}
 		}

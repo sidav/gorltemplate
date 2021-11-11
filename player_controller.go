@@ -13,9 +13,7 @@ type playerController struct {
 
 func (pc *playerController) playerTurn() {
 	var key string
-	fovMap := CURRENTLEVEL.getFovMapFrom(pc.player.x, pc.player.y, 10)
-	CURRENTLEVEL.updateWasSeenFromFovMap(fovMap)
-	RENDERER.render(pc.player.x, pc.player.y, fovMap)
+	RENDERER.render(pc.player.x, pc.player.y, playerFovMap)
 
 	if pc.isRunning {
 		pc.run()
